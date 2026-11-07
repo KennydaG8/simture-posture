@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SIMTURE AI 體態掃描</title>
+  <meta name="description" content="三個角度、八項指標，用 AI 關鍵點量化你的站姿。影像只在你的裝置上分析。">
+  <meta name="theme-color" content="#F3ECE2">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23F3ECE2'/%3E%3Cpath d='M16 3v13' stroke='%232F2923' stroke-width='1.4'/%3E%3Cpath d='M11.5 16.5a4.5 3 0 0 1 9 0L16 28z' fill='%23B08A4E'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@400;500&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="brand-bar">
+    <span class="brand">SIMTURE</span>
+    <span class="brand-sub">AI 體態掃描</span>
+  </header>
+
+  <main>
+    <section data-screen="intro" class="intro">
+      <div class="hero">
+      <div class="intro-copy">
+        <p class="eyebrow">體態，從好好站著開始</p>
+        <h1>放鬆站著，<br>其餘交給我們</h1>
+        <p class="lead">約三分鐘，三個角度。語音會慢慢帶著你，你只要自然地站好，就能當場看見自己的體態報告。</p>
+        <dl class="facts">
+          <div><dt>33</dt><dd>身體關鍵點</dd></div>
+          <div><dt>8</dt><dd>體態指標</dd></div>
+          <div><dt>3</dt><dd>掃描視角</dd></div>
+        </dl>
+        <div class="actions">
+          <button class="btn primary" id="start" data-start>開始掃描</button>
+          <button class="btn ghost" id="sample" data-sample>查看範例報告</button>
+        </div>
+        <p class="privacy">影像只在你的裝置上分析，不會上傳，也不需要留下姓名或 Email。</p>
+      </div>
+      <figure class="intro-figure">
+        <img src="assets/hero.webp" alt="" fetchpriority="high">
+        <img class="light-shift" src="assets/hero-late.webp" alt="" fetchpriority="low">
+      </figure>
+      </div>
+
+      <div class="story">
+        <section class="manifesto reveal">
+          <p class="eyebrow">為什麼看站姿</p>
+          <h2>站姿，是身體最誠實的習慣</h2>
+          <p class="lead">久坐、滑手機、慣用的那一側，都會慢慢留在身上。我們把它化為看得見的角度，讓你知道該從哪裡開始調整。</p>
+        </section>
+
+        <section class="reveal">
+          <h2>三分鐘，三個動作</h2>
+          <ol class="flow">
+            <li><span>1</span><strong>放好手機</strong><p>靠穩手機，退到兩至三公尺，讓身體入鏡。</p></li>
+            <li><span>2</span><strong>跟著語音站好</strong><p>正面、側面、背面。站定後自動拍攝，不用碰螢幕。</p></li>
+            <li><span>3</span><strong>當場看報告</strong><p>八項指標、參考範圍與改善方向，一次呈現。</p></li>
+          </ol>
+        </section>
+
+        <section class="reveal">
+          <p class="eyebrow">你會看見什麼</p>
+          <h2>八項指標，一次看清楚</h2>
+          <ul class="indicators" id="indicators"></ul>
+          <p class="method">部分指標為關鍵點代理量測，僅供姿勢篩檢參考，不是 X 光或醫療診斷。</p>
+        </section>
+
+        <section class="preview reveal">
+          <div>
+            <p class="eyebrow">報告預覽</p>
+            <h2>不只是分數，<br>是調整的起點</h2>
+            <p class="lead">每項指標都有實際角度、參考範圍和改善方向，也會依你的目標推薦適合的方案。</p>
+            <div class="actions"><button class="btn" data-sample>查看完整範例報告</button></div>
+          </div>
+          <div class="preview-card" id="report-preview"></div>
+        </section>
+
+        <section class="promises reveal">
+          <div><strong>影像不上傳</strong><p>分析全程在你的裝置上完成，照片不會傳到我們的伺服器。</p></div>
+          <div><strong>不需留下資料</strong><p>不用姓名、不用 Email，看完報告關掉頁面就結束。</p></div>
+          <div><strong>誠實的篩檢</strong><p>這是姿勢篩檢，不是醫療診斷；需要時，我們會建議你找專業人員評估。</p></div>
+        </section>
+
+        <section class="closing reveal">
+          <img src="assets/plumb.webp" alt="" loading="lazy">
+          <div>
+            <h2>準備好了，<br>就放鬆站著</h2>
+            <div class="actions"><button class="btn primary" data-start>開始掃描</button></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section data-screen="intake" class="panel" hidden>
+      <p class="eyebrow">第一步</p>
+      <h2>先認識你一點</h2>
+      <p class="lead">這些答案只用來調整報告內容，不會離開這個頁面。</p>
+      <form id="intake-form">
+        <fieldset><legend>年齡區間</legend><div class="chips" id="age-options"></div></fieldset>
+        <fieldset><legend>目前是否有疼痛或不適？</legend><div class="chips" id="discomfort-options"></div></fieldset>
+        <fieldset><legend>最主要的目標</legend><div class="chips stacked" id="goal-options"></div></fieldset>
+        <label class="consent">
+          <input type="checkbox" id="consent">
+          <span>我了解這是姿勢篩檢，不是 X 光或醫療診斷。未滿 18 歲請由監護人陪同使用；疼痛、麻木、暈眩或近期受傷者請先諮詢專業人員。</span>
+        </label>
+        <div class="actions">
+          <button class="btn primary" type="submit" id="intake-next" disabled>下一步</button>
+          <button class="btn ghost" type="button" data-go="intro">返回</button>
+        </div>
+      </form>
+    </section>
+
+    <section data-screen="setup" class="setup" hidden>
+      <div class="setup-copy">
+      <p class="eyebrow">第二步</p>
+      <h2>找一個舒服的位置</h2>
+      <ul class="tips">
+        <li><strong>放好裝置</strong>手機直立靠穩，鏡頭約在腰到胸口高度，保持水平。</li>
+        <li><strong>站開距離</strong>退到 2～3 公尺，側面掃描時頭頂到雙腳都要入鏡。</li>
+        <li><strong>穿著與光線</strong>穿合身衣物，光線充足均勻，畫面中只留你一人。</li>
+        <li><strong>打開聲音</strong>背對鏡頭時看不到螢幕，語音會全程陪著你。</li>
+      </ul>
+      <p class="model-status" id="model-status" role="status">正在載入 AI 模型…</p>
+      <div class="actions">
+        <button class="btn primary" id="use-camera" disabled>用相機即時掃描</button>
+        <button class="btn ghost" id="use-upload" disabled>改為上傳三張照片</button>
+      </div>
+      <p class="error" id="setup-error" role="alert" hidden></p>
+      </div>
+      <figure class="setup-figure"><img src="assets/plumb.webp" alt="" loading="lazy"></figure>
+    </section>
+
+    <section data-screen="scan" class="scan" hidden>
+      <div class="stage">
+        <video id="scan-video" playsinline muted></video>
+        <canvas id="scan-overlay"></canvas>
+      </div>
+      <ol class="steps" id="scan-steps"></ol>
+      <div class="scan-hud">
+        <svg class="hold" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="46"></circle>
+          <circle cx="50" cy="50" r="46" id="hold-ring"></circle>
+        </svg>
+        <div class="scan-text">
+          <p id="scan-message" role="status" aria-live="polite"></p>
+          <p id="scan-tip"></p>
+        </div>
+      </div>
+      <div class="scan-controls">
+        <button class="btn small" id="voice-toggle" aria-pressed="true">聲音：開</button>
+        <button class="btn small" id="camera-toggle">切換鏡頭</button>
+        <button class="btn small" id="scan-exit">結束</button>
+      </div>
+    </section>
+
+    <section data-screen="upload" class="panel" hidden>
+      <p class="eyebrow">第三步</p>
+      <h2>上傳三張照片</h2>
+      <p class="lead">照片會在這個頁面內分析，不會上傳。</p>
+      <div class="uploads" id="uploads"></div>
+      <div class="actions">
+        <button class="btn primary" id="upload-done" disabled>產生報告</button>
+        <button class="btn ghost" type="button" data-go="setup">返回</button>
+      </div>
+    </section>
+
+    <section data-screen="processing" class="processing" hidden>
+      <div class="breath" aria-hidden="true"></div>
+      <h2>跟著圓圈，慢慢呼吸</h2>
+      <p class="lead">你的體態報告正在整理</p>
+    </section>
+
+    <section data-screen="report" class="report" id="report" hidden></section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
