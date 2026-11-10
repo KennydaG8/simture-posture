@@ -9,7 +9,7 @@ import {
 
 const VISION_URL = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14";
 const MODEL_URL = "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task";
-const BOOKING_URL = "https://simtureinc.com/";
+const LINE_ID = "@978qsizf";
 
 const MAX_IMAGE_DIMENSION = 1280;
 const HOLD_MS = 2000;
@@ -498,10 +498,17 @@ function metricCard(item, related) {
     </details>`;
 }
 
+function lineMessageUrl(text) {
+  return `https://line.me/R/oaMessage/${encodeURIComponent(LINE_ID)}/?${encodeURIComponent(text)}`;
+}
+
 function renderReport(sample) {
   const views = Object.fromEntries(VIEWS.map(({ id }) => [id, state.views[id].analyses]));
   const items = selectItems(views);
   const { score, grade } = scoreAndGrade(items);
+  const bookingUrl = lineMessageUrl(sample
+    ? "你好，我看了網頁的 AI 體態範例報告，想預約現場教練評估。"
+    : `你好，我剛做完網頁 AI 體態掃描（${score} 分，${grade}），想預約現場教練評估。`);
   const flagged = items.filter((item) => item.status !== "維持").sort(bySeverity);
   const relatedItems = DISCOMFORT_ITEMS[state.discomfort] ?? [];
   const goal = GOALS.find(({ label }) => label === state.goal);
@@ -566,7 +573,7 @@ function renderReport(sample) {
         <h2>${plan.name}</h2>
         <p>${plan.duration}．${plan.suitable}</p>
         <ul>${plan.contents.map((content) => `<li>${content}</li>`).join("")}</ul>
-        <a class="btn primary" href="${BOOKING_URL}" target="_blank" rel="noopener">預約教練現場評估</a>
+        <a class="btn primary" href="${bookingUrl}" target="_blank" rel="noopener">預約教練現場評估</a>
       </div>
       <img src="assets/plumb.webp" alt="" loading="lazy">
     </section>` : ""}
